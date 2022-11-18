@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
@@ -57,7 +59,9 @@ public class PlayerController : MonoBehaviour
 
     private void ChangePosition(int lineIndex)
     {
-        _player.position = new Vector3(_linePositions[lineIndex].position.x, transform.position.y, transform.position.z);
+        Vector3 targetPosition = new Vector3(_linePositions[lineIndex].position.x, transform.position.y, transform.position.z);
+        _player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        _player.transform.position = Vector3.Lerp(_player.transform.position, targetPosition, 10 * Time.deltaTime);
     }
 
     private void Initialize()
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         _moveDirection.z = _speed;
         _characterController.Move(_moveDirection * Time.fixedDeltaTime);
+        ChangePosition(_lineIndex);
     }
 
 }
