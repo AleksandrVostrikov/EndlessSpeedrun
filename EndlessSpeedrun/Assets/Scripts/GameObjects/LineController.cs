@@ -32,7 +32,7 @@ public class LineController : MonoBehaviour
 
     private void LateUpdate()
     {
-        _lines.position = new Vector3(transform.position.x, transform.position.y, _player.position.z);
+        _lines.position = new Vector3(transform.position.x, _player.position.y, _player.position.z);
     }
 
     private void ChangeDistanceBetveenPointers()
