@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private float _gravity = -50f;
 
-    private float _gravity = -50f;
     private bool _isGrounded;
     private Vector3 _velocity;
 
@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private string _rotatateDirection;
 
     public int LineIndex { get { return _lineIndex; } }
+    public float Speed { get { return _speed; } }
+    public float Gravity { get { return _gravity; } }
 
     private void Start()
     {
