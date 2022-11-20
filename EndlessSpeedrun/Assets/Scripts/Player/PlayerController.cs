@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _linePositions;
     [SerializeField] private Transform _player;
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private float _jumpHeight = 2f;
 
-    private float gravity = -50f;
+    private float _gravity = -50f;
+    private bool _isGrounded;
     private Vector3 _velocity;
-    private float _jumpHeight = 200f;
 
     private CharacterController _characterController;
     private Vector3 _moveDirection;
@@ -34,16 +36,17 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _velocity.y += Mathf.Sqrt(_jumpHeight * -2 * gravity);
-        }
+        CheckGrounded();
+        RealizeGravity();
+        Move();
+        ChangePosition(_lineIndex);
+        Jump();
         SwipeLine();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        //Move();
     }
     
     private void SwipeLine()
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 targetPosition = new Vector3(_linePositions[lineIndex].position.x, transform.position.y, transform.position.z);
         SetRotation(lineIndex, _rotatateDirection);
-        transform.position = Vector3.Lerp(_player.transform.position, targetPosition, 10 * Time.deltaTime);
+        transform.position = Vector3.Lerp(_player.transform.position, targetPosition, 30 * Time.deltaTime);
     }
 
     private void SetRotation(int lineIndex, string direction)
@@ -105,11 +108,35 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        _velocity.y += gravity * Time.fixedDeltaTime;
         _moveDirection.z = _speed;
-        _characterController.Move(_moveDirection * Time.fixedDeltaTime);
-        _characterController.Move(_velocity * Time.fixedDeltaTime);
-        ChangePosition(_lineIndex);
+
+        _characterController.Move(_velocity * Time.deltaTime);
+        _characterController.Move(_moveDirection * Time.deltaTime);
+
+        //ChangePosition(_lineIndex);
+    }
+
+    private void CheckGrounded()
+    {
+        _isGrounded = Physics.CheckSphere(transform.position, 0.5f, _groundLayer, QueryTriggerInteraction.Ignore);
+    }
+    private void RealizeGravity()
+    {
+        if (_isGrounded && _velocity.y < 0)
+        {
+            _velocity.y = 0;
+        }
+        else
+        {
+            _velocity.y += _gravity * Time.deltaTime;
+        }
+    }
+    private void Jump()
+    {
+        if(_isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            _velocity.y += Mathf.Sqrt(_jumpHeight * -2 * _gravity);
+        }
     }
 
 }
