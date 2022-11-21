@@ -10,7 +10,9 @@ public class LineController : MonoBehaviour
     [SerializeField] private Transform _lines;
     [SerializeField] private Transform _player;
     [SerializeField] private int _maxChangeDistanceIndex;
-
+    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private PointerPositionCalculator _pointerPositionCalculator;
+    
     private void OnEnable()
     {
         _playerController.OnIndexChanged += IndexChanged;
@@ -23,6 +25,7 @@ public class LineController : MonoBehaviour
     private void Start()
     {
         _maxChangeDistanceIndex = 3;
+
     }
 
     private void Update()
@@ -33,6 +36,11 @@ public class LineController : MonoBehaviour
     private void LateUpdate()
     {
         _lines.position = new Vector3(transform.position.x, _player.position.y, _player.position.z);
+    }
+
+    private float[] GetPointerPosition()
+    {
+
     }
 
     private void ChangeDistanceBetveenPointers()
