@@ -6,7 +6,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class LineController : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
-    [SerializeField] private GameObject[] _pointers;
+    [SerializeField] private Transform[] _pointers;
     [SerializeField] private Transform _lines;
     [SerializeField] private Transform _player;
     [SerializeField] private int _maxChangeDistanceIndex;
@@ -25,7 +25,8 @@ public class LineController : MonoBehaviour
     private void Start()
     {
         _maxChangeDistanceIndex = 3;
-
+        _pointerPositionCalculator = new(_pointers, _layerMask);
+        GetPointerPosition();
     }
 
     private void Update()
@@ -40,7 +41,7 @@ public class LineController : MonoBehaviour
 
     private float[] GetPointerPosition()
     {
-
+        return _pointerPositionCalculator.GetPointersDistance();
     }
 
     private void ChangeDistanceBetveenPointers()
@@ -63,11 +64,11 @@ public class LineController : MonoBehaviour
     private void IndexChanged()
     {
         int LineIndex = _playerController.LineIndex;
-        foreach (GameObject go in _pointers)
+        foreach (Transform go in _pointers)
         {
-            go.SetActive(true);
+            go.gameObject.SetActive(true);
         }
-        _pointers[LineIndex].SetActive(false);
+        _pointers[LineIndex].gameObject.SetActive(false);
 
     }
 }

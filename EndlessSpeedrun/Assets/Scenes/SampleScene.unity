@@ -301,12 +301,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1101918982}
   _pointers:
-  - {fileID: 1443913014}
-  - {fileID: 281635091}
-  - {fileID: 1211125149}
+  - {fileID: 1443913015}
+  - {fileID: 281635092}
+  - {fileID: 1211125150}
   _lines: {fileID: 159661168}
   _player: {fileID: 1101918981}
   _maxChangeDistanceIndex: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &272240267
 PrefabInstance:
   m_ObjectHideFlags: 0

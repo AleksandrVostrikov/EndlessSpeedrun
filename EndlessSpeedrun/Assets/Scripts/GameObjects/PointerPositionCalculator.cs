@@ -21,7 +21,7 @@ public class PointerPositionCalculator
         _layerMask = _layer;
     }
 
-    public float[] GetPosition()
+    public float[] GetPointersDistance()
     {
         float[] result = new float[3];
         for (int i = 0; i < 3; i++)
