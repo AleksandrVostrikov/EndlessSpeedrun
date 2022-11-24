@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public int LineIndex { get { return _lineIndex; } }
     public float Speed { get { return _speed; } }
     public float Gravity { get { return _gravity; } }
+    public LayerMask LayerMask { get { return _groundLayer; } }
 
     private void Start()
     {

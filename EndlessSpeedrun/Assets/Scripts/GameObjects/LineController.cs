@@ -11,7 +11,9 @@ public class LineController : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private int _maxChangeDistanceIndex;
     [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private PointerPositionCalculator _pointerPositionCalculator;
+    
+
+    [SerializeField] private RayCaster _rayCaster;
     
     private void OnEnable()
     {
@@ -25,23 +27,24 @@ public class LineController : MonoBehaviour
     private void Start()
     {
         _maxChangeDistanceIndex = 3;
-        _pointerPositionCalculator = new(_pointers, _layerMask);
-        GetPointerPosition();
     }
 
     private void Update()
     {
         ChangeDistanceBetveenPointers();
+        float[] hitDistance = _rayCaster.GetGroundDistance(_layerMask);
+        for (int i = 0; i< 3; i++)
+        {
+            if (_pointers[i].gameObject.activeSelf)
+            {
+                _pointers[i].position = new Vector3(_pointers[i].position.x, hitDistance[i], _pointers[i].position.z);
+            }
+        }
     }
 
     private void LateUpdate()
     {
         _lines.position = new Vector3(transform.position.x, _player.position.y, _player.position.z);
-    }
-
-    private float[] GetPointerPosition()
-    {
-        return _pointerPositionCalculator.GetPointersDistance();
     }
 
     private void ChangeDistanceBetveenPointers()
