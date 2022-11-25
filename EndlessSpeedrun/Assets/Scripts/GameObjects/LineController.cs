@@ -32,14 +32,7 @@ public class LineController : MonoBehaviour
     private void Update()
     {
         ChangeDistanceBetveenPointers();
-        float[] hitDistance = _rayCaster.GetGroundDistance(_layerMask);
-        for (int i = 0; i< 3; i++)
-        {
-            if (_pointers[i].gameObject.activeSelf)
-            {
-                _pointers[i].position = new Vector3(_pointers[i].position.x, hitDistance[i], _pointers[i].position.z);
-            }
-        }
+        SetPointersPositions();
     }
 
     private void LateUpdate()
@@ -73,5 +66,17 @@ public class LineController : MonoBehaviour
         }
         _pointers[LineIndex].gameObject.SetActive(false);
 
+    }
+
+    private void SetPointersPositions()
+    {
+        float[] hitDistance = _rayCaster.GetGroundDistance(_layerMask);
+        for (int i = 0; i < 3; i++)
+        {
+            if (_pointers[i].gameObject.activeSelf)
+            {
+                _pointers[i].position = new Vector3(_pointers[i].position.x, 10 - hitDistance[i], _pointers[i].position.z);
+            }
+        }
     }
 }

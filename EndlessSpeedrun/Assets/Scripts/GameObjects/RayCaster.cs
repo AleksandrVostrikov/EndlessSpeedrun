@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class RayCaster : MonoBehaviour
 {
-    [SerializeField] PlayerController _playerController;
-    [SerializeField] GameObject[] _pointers;
+    [SerializeField] Transform[] _pointers;
 
     private RaycastHit _hit;
 
@@ -16,11 +15,10 @@ public class RayCaster : MonoBehaviour
         float[] hitDistance = new float[_pointers.Length]; 
         for(int i = 0; i < _pointers.Length; i++)
         {
-            if (_pointers[i].activeSelf)
+            if (_pointers[i].gameObject.activeSelf)
             {
-                Vector3 midPosition = Vector3.up * 6;
-                Physics.Raycast(_pointers[i].transform.position, _pointers[i].transform.TransformDirection(Vector3.down) + midPosition, out _hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore);
-                //Debug.DrawRay(_pointers[i].transform.position, _pointers[i].transform.TransformDirection(Vector3.down) * _hit.distance, Color.red);
+                Vector3 midPosition = new Vector3(_pointers[i].position.x, 10, _pointers[i].position.z);
+                Physics.Raycast(midPosition, Vector3.down, out _hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore);
                 hitDistance[i] = _hit.distance;
             }
             else
