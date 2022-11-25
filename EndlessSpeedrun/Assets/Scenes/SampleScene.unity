@@ -324,11 +324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7200c276589a45643995a74b8ae2c42b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 1101918982}
   _pointers:
-  - {fileID: 1443913014}
-  - {fileID: 281635091}
-  - {fileID: 1211125149}
+  - {fileID: 1443913015}
+  - {fileID: 281635092}
+  - {fileID: 1211125150}
 --- !u!1001 &272240267
 PrefabInstance:
   m_ObjectHideFlags: 0
