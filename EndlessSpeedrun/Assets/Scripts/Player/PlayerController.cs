@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private float _gravity = -50f;
+
     [SerializeField] private Transform[] _linePositions;
     [SerializeField] private Transform _player;
     [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private float _jumpHeight = 2f;
-    [SerializeField] private float _gravity = -50f;
 
     private bool _isGrounded;
     private Vector3 _velocity;
@@ -28,9 +23,6 @@ public class PlayerController : MonoBehaviour
     private string _rotatateDirection;
 
     public int LineIndex { get { return _lineIndex; } }
-    public float Speed { get { return _speed; } }
-    public float Gravity { get { return _gravity; } }
-    public LayerMask LayerMask { get { return _groundLayer; } }
 
     private void Start()
     {
@@ -44,11 +36,6 @@ public class PlayerController : MonoBehaviour
         ChangePosition(_lineIndex);
         Jump();
         SwipeLine();
-    }
-
-    private void FixedUpdate()
-    {
-        //Move();
     }
     
     private void SwipeLine()
@@ -114,14 +101,13 @@ public class PlayerController : MonoBehaviour
 
         _characterController.Move(_velocity * Time.deltaTime);
         _characterController.Move(_moveDirection * Time.deltaTime);
-
-        //ChangePosition(_lineIndex);
     }
 
     private void CheckGrounded()
     {
         _isGrounded = Physics.CheckSphere(transform.position, 0.5f, _groundLayer, QueryTriggerInteraction.Ignore);
     }
+
     private void RealizeGravity()
     {
         if (_isGrounded && _velocity.y < 0)
@@ -133,6 +119,7 @@ public class PlayerController : MonoBehaviour
             _velocity.y += _gravity * Time.deltaTime;
         }
     }
+
     private void Jump()
     {
         if(_isGrounded && Input.GetKeyDown(KeyCode.Space))

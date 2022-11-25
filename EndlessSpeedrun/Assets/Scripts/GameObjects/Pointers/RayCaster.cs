@@ -1,16 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class RayCaster : MonoBehaviour
+public class RayCaster
 {
-    [SerializeField] Transform[] _pointers;
-
     private RaycastHit _hit;
 
-    public float[] GetGroundDistance(LayerMask layerMask)
+    public float[] GetGroundDistance(LayerMask layerMask, Transform[] _pointers)
     {
         float[] hitDistance = new float[_pointers.Length]; 
         for(int i = 0; i < _pointers.Length; i++)

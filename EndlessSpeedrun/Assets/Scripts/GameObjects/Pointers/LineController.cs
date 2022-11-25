@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LineController : MonoBehaviour
 {
@@ -11,9 +8,8 @@ public class LineController : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private int _maxChangeDistanceIndex;
     [SerializeField] private LayerMask _layerMask;
-    
 
-    [SerializeField] private RayCaster _rayCaster;
+    private RayCaster _rayCaster;
     
     private void OnEnable()
     {
@@ -27,6 +23,7 @@ public class LineController : MonoBehaviour
     private void Start()
     {
         _maxChangeDistanceIndex = 3;
+        _rayCaster = new();
     }
 
     private void Update()
@@ -70,12 +67,12 @@ public class LineController : MonoBehaviour
 
     private void SetPointersPositions()
     {
-        float[] hitDistance = _rayCaster.GetGroundDistance(_layerMask);
+        float[] hitDistance = _rayCaster.GetGroundDistance(_layerMask, _pointers);
         for (int i = 0; i < 3; i++)
         {
             if (_pointers[i].gameObject.activeSelf)
             {
-                _pointers[i].position = new Vector3(_pointers[i].position.x, 10 - hitDistance[i], _pointers[i].position.z);
+                _pointers[i].position = new Vector3(_pointers[i].position.x, 10.5f - hitDistance[i], _pointers[i].position.z);
             }
         }
     }
