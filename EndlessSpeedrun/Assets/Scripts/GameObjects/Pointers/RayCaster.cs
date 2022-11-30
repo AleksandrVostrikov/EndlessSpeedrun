@@ -22,4 +22,5 @@ public class RayCaster
         }
         return hitDistance;
     }
+
 }

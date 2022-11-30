@@ -15,6 +15,7 @@ public class LineController : MonoBehaviour
     {
         _playerController.OnIndexChanged += IndexChanged;
     }
+
     private void OnDisable()
     {
         _playerController.OnIndexChanged -= IndexChanged;
