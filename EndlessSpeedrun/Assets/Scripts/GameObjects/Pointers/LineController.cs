@@ -1,5 +1,8 @@
 using UnityEngine;
+using Player;
 
+namespace Pointers
+{
 public class LineController : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
@@ -9,7 +12,7 @@ public class LineController : MonoBehaviour
     [SerializeField] private int _maxChangeDistanceIndex;
     [SerializeField] private LayerMask _layerMask;
 
-    private RayCaster _rayCaster;
+    private PointerRayCaster _rayCaster;
     
     private void OnEnable()
     {
@@ -78,3 +81,6 @@ public class LineController : MonoBehaviour
         }
     }
 }
+}
+
+

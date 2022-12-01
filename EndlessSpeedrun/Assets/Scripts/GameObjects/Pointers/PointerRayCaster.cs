@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class RayCaster
+namespace Pointers
+{
+public class PointerRayCaster
 {
     private RaycastHit _hit;
 
@@ -24,3 +26,5 @@ public class RayCaster
     }
 
 }
+}
+
