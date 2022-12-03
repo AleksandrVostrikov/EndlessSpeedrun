@@ -38,6 +38,8 @@ namespace Player
             ChangePosition(_lineIndex);
             Jump();
             SwipeLine();
+            SpeedUp();
+            SpeedDown();
         }
 
         private void SwipeLine()
@@ -127,6 +129,30 @@ namespace Player
             if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
             {
                 _velocity.y += Mathf.Sqrt(_jumpHeight * -2 * _gravity);
+            }
+        }
+
+        private void SpeedUp()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                _speed += 3;
+            }
+            else if (Input.GetKeyUp(KeyCode.UpArrow))
+            {
+                _speed -= 3;
+            }
+        }
+
+        private void SpeedDown()
+        {
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                _speed -= 3;
+            }
+            else if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                _speed += 3;
             }
         }
 
