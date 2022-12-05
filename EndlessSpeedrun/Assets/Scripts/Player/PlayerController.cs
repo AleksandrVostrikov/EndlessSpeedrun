@@ -5,11 +5,12 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float _speed;
-        [SerializeField] private float _jumpHeight = 2f;
-        [SerializeField] private float _gravity = -50f;
+        [SerializeField] private float _jumpHeight = 10f;
+        [SerializeField] private float _gravity = -20f;
 
         [SerializeField] private Transform[] _linePositions;
         [SerializeField] private Transform _player;
+        [SerializeField] private Transform _fox;
         [SerializeField] private LayerMask _groundLayer;
 
         private bool _isGrounded;
@@ -30,16 +31,21 @@ namespace Player
         {
             Initialize();
         }
+
         private void Update()
         {
             CheckGrounded();
             RealizeGravity();
-            Move();
-            ChangePosition(_lineIndex);
             Jump();
             SwipeLine();
             SpeedUp();
             SpeedDown();
+        }
+
+        private void FixedUpdate()
+        {
+            Move();
+            ChangePosition(_lineIndex);
         }
 
         private void SwipeLine()
@@ -70,7 +76,7 @@ namespace Player
         {
             Vector3 targetPosition = new Vector3(_linePositions[lineIndex].position.x, transform.position.y, transform.position.z);
             SetRotation(lineIndex, _rotatateDirection);
-            transform.position = Vector3.Lerp(_player.transform.position, targetPosition, 30 * Time.deltaTime);
+            transform.position = Vector3.Lerp(_player.transform.position, targetPosition, 15 * Time.fixedDeltaTime);
         }
 
         private void SetRotation(int lineIndex, string direction)
@@ -79,16 +85,19 @@ namespace Player
             {
                 if (direction == "Right")
                 {
-                    _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 75, 0), 15 * Time.deltaTime);
+                    _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 75, 0), 15 * Time.fixedDeltaTime);
+                    _fox.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 75, 0), 15 * Time.fixedDeltaTime);
                 }
                 else if (direction == "Left")
                 {
-                    _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, -75, 0), 15 * Time.deltaTime);
+                    _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, -75, 0), 15 * Time.fixedDeltaTime);
+                    _fox.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, -75, 0), 15 * Time.fixedDeltaTime);
                 }
             }
             else
             {
-                _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 0, 0), 15 * Time.deltaTime);
+                _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 0, 0), 15 * Time.fixedDeltaTime);
+                _fox.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 0, 0), 15 * Time.fixedDeltaTime);
             }
         }
 
@@ -103,8 +112,8 @@ namespace Player
         {
             _moveDirection.z = _speed;
 
-            _characterController.Move(_velocity * Time.deltaTime);
-            _characterController.Move(_moveDirection * Time.deltaTime);
+            _characterController.Move(_velocity * Time.fixedDeltaTime);
+            _characterController.Move(_moveDirection * Time.fixedDeltaTime);
         }
 
         private void CheckGrounded()
@@ -120,7 +129,7 @@ namespace Player
             }
             else
             {
-                _velocity.y += _gravity * Time.deltaTime;
+                _velocity.y += _gravity * Time.fixedDeltaTime;
             }
         }
 
