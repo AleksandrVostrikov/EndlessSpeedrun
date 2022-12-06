@@ -623,6 +623,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1101918981}
+  _chiken: {fileID: 855609247}
+  _fox: {fileID: 532264686}
+  _speed: 0
 --- !u!4 &203192873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4021494074433550, guid: 23f312332b5cd5542ba196450880e89b,
@@ -2170,7 +2173,6 @@ MonoBehaviour:
   - {fileID: 281635092}
   - {fileID: 1211125150}
   _player: {fileID: 855609247}
-  _fox: {fileID: 532264686}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64

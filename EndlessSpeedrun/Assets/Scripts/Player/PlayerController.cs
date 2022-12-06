@@ -10,7 +10,6 @@ namespace Player
 
         [SerializeField] private Transform[] _linePositions;
         [SerializeField] private Transform _player;
-        [SerializeField] private Transform _fox;
         [SerializeField] private LayerMask _groundLayer;
 
         private bool _isGrounded;
@@ -86,18 +85,15 @@ namespace Player
                 if (direction == "Right")
                 {
                     _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 75, 0), 15 * Time.fixedDeltaTime);
-                    _fox.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 75, 0), 15 * Time.fixedDeltaTime);
                 }
                 else if (direction == "Left")
                 {
                     _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, -75, 0), 15 * Time.fixedDeltaTime);
-                    _fox.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, -75, 0), 15 * Time.fixedDeltaTime);
                 }
             }
             else
             {
                 _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 0, 0), 15 * Time.fixedDeltaTime);
-                _fox.transform.rotation = Quaternion.Lerp(_player.transform.rotation, Quaternion.Euler(0, 0, 0), 15 * Time.fixedDeltaTime);
             }
         }
 
