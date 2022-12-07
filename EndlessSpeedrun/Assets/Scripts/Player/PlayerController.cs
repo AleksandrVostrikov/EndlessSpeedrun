@@ -12,6 +12,8 @@ namespace Player
         [SerializeField] private Transform _player;
         [SerializeField] private LayerMask _groundLayer;
 
+        [SerializeField] private FoxController _foxController;
+
         private bool _isGrounded;
         private Vector3 _velocity;
 
@@ -33,18 +35,25 @@ namespace Player
 
         private void Update()
         {
-            CheckGrounded();
-            RealizeGravity();
-            Jump();
-            SwipeLine();
-            SpeedUp();
-            SpeedDown();
+            if (!_foxController.MoveFox)
+            {
+                CheckGrounded();
+                RealizeGravity();
+                Jump();
+                SwipeLine();
+                SpeedUp();
+                SpeedDown();
+            }
+            
         }
 
         private void FixedUpdate()
         {
-            Move();
-            ChangePosition(_lineIndex);
+            if (!_foxController.MoveFox)
+            {
+                Move();
+                ChangePosition(_lineIndex);
+            }
         }
 
         private void SwipeLine()

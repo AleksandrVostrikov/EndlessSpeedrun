@@ -625,7 +625,7 @@ MonoBehaviour:
   _player: {fileID: 1101918981}
   _chiken: {fileID: 855609247}
   _fox: {fileID: 532264686}
-  _speed: 0
+  _speed: 8
 --- !u!4 &203192873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4021494074433550, guid: 23f312332b5cd5542ba196450880e89b,
@@ -1398,6 +1398,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1292695675}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &532264687
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532264684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6368964
+  m_Height: 1.7813745
+  m_Direction: 2
+  m_Center: {x: -0.010828614, y: 0.9474298, z: -0.24037242}
 --- !u!4 &583919585 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4661435515762813124, guid: e289bf5debb17f6459818c207d781953,
@@ -2176,6 +2190,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _foxController: {fileID: 197704871}
 --- !u!143 &1101918983
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2207,6 +2222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreController: {fileID: 1708766366}
+  _foxController: {fileID: 197704871}
 --- !u!1001 &1128155006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2483,6 +2499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: animations
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a766613231277a647b46fd111ba6bfe7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a766613231277a647b46fd111ba6bfe7, type: 3}

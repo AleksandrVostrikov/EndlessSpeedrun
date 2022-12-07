@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FoxController : MonoBehaviour
 {
@@ -10,6 +10,14 @@ public class FoxController : MonoBehaviour
 
     [SerializeField] private float _speed;
 
+    private bool _moveFox;
+
+    public bool MoveFox
+    {
+        get { return _moveFox; }
+        set { _moveFox = value; }
+    }
+
     private void LateUpdate()
     {
         transform.position = _player.position;
@@ -18,14 +26,9 @@ public class FoxController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (_fox.position.z < -1.66f)
-        //{
-        //    _fox.Translate(Vector3.forward * _speed * Time.fixedDeltaTime);
-        //}
-
-        _fox.position = Vector3.MoveTowards(_fox.position, _chiken.position, _speed * Time.fixedDeltaTime);
-        
+        if (_moveFox)
+        {
+            _fox.position = Vector3.MoveTowards(_fox.position, _chiken.position, _speed * Time.fixedDeltaTime);
+        }
     }
-
-
 }

@@ -4,7 +4,9 @@ namespace Player
     {
         Player,
         Enemy,
-        Seed
+        Seed,
+        Fox
+        
     }
 }
 
