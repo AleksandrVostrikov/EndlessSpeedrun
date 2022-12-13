@@ -18,7 +18,7 @@ public class ChunkPlacer : MonoBehaviour
 
     private void Update()
     {
-        if (_player.position.z > _chunksOnScene[^1].End.position.z - 50)
+        if (_player.position.z > _chunksOnScene[^1].End.position.z - 80)
         {
             CreateChunk();
         }
@@ -30,7 +30,7 @@ public class ChunkPlacer : MonoBehaviour
         newChunk.transform.position = _chunksOnScene[^1].End.position - newChunk.Begin.localPosition;
         _chunksOnScene.Add(newChunk);
 
-        if (_chunksOnScene.Count > 2)
+        if (_chunksOnScene.Count > 3)
         {
             Destroy(_chunksOnScene[0].gameObject);
             _chunksOnScene.RemoveAt(0);

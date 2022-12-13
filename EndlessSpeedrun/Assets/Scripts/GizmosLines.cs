@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GizmosLines : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnDrawGizmos()
     {
-        
-    }
+        Gizmos.color = Color.red;
 
-    // Update is called once per frame
-    void Update()
-    {
+        Gizmos.DrawRay(new Vector3(0,1,0), Vector3.forward * 60);
+        for (int i = 3; i <= 8; i++)
+        {
+            Gizmos.DrawRay(new Vector3(-i, 1, 0), Vector3.forward * 60);
+            Gizmos.DrawRay(new Vector3(i, 1, 0), Vector3.forward * 60);
+        }
         
+
+
     }
 }
