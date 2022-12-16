@@ -44,17 +44,17 @@ public class LineController : MonoBehaviour
     private void ChangeDistanceBetveenPointers()
     {
         
-        if (Input.GetKeyDown(KeyCode.KeypadPlus) && _maxChangeDistanceIndex < 5)
+        if (Input.GetKeyDown(KeyCode.KeypadPlus) && _maxChangeDistanceIndex < 4)
         {
             _maxChangeDistanceIndex++;
-            _pointers[0].transform.position += Vector3.left;
-            _pointers[2].transform.position += Vector3.right;
+            _pointers[0].transform.position += Vector3.left *2 ;
+            _pointers[2].transform.position += Vector3.right * 2;
         }
-        else if (Input.GetKeyDown(KeyCode.KeypadMinus) && _maxChangeDistanceIndex > 0)
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus) && _maxChangeDistanceIndex > 1)
         {
             _maxChangeDistanceIndex--;
-            _pointers[0].transform.position += Vector3.right;
-            _pointers[2].transform.position += Vector3.left;
+            _pointers[0].transform.position += Vector3.right * 2;
+            _pointers[2].transform.position += Vector3.left * 2;
         }
     }
 
